@@ -1,0 +1,64 @@
+<!--
+  Nama File:          base.html
+  Deskripsi File:     Template master layout HTML aplikasi Flask (Layouts)
+  Penulis File:       Fawwaz Yaqzhan & Google Antigravity
+  Tanggal Pembuatan:  06-09-2026
+  Tanggal Pembaruan:  28-09-2026
+  Catatan:
+    - Kerangka HTML5 semantik dan metadata SEO
+    - Memuat pustaka HTMX dan Alpine.js lokal untuk pengoperasian 100% offline
+    - Mendukung sistem partials, flash messages dinamis, dan HTMX swapping
+-->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Template Proyek Python Flask modern dengan arsitektur bersih, Service Layer, Jinja2, HTMX, dan Alpine.js.">
+    <title>{% block title %}Flask Modern Template v2{% endblock %}</title>
+
+    <!-- Stylesheet Utama -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- Vendor Libraries (Full Offline: HTMX & Alpine.js) -->
+    <script src="{{ url_for('static', filename='js/vendor/htmx.min.js') }}"></script>
+    <script defer src="{{ url_for('static', filename='js/vendor/alpine.min.js') }}"></script>
+</head>
+<body hx-boost="false">
+    <!-- Navbar Header -->
+    <header class="navbar" id="app-navbar">
+        <div class="container nav-container">
+            <a href="{{ url_for('main.index') }}" class="brand-logo">
+                <span class="brand-icon">⚡</span>
+                <span class="brand-text">Flask<span class="brand-accent">Template</span> <span class="version-tag">v2.0</span></span>
+            </a>
+            <nav class="nav-links">
+                <a href="#modern-architecture" class="nav-link">Arsitektur v2</a>
+                <a href="#crud-demo" class="nav-link">Demo HTMX</a>
+                <a href="/api/items" target="_blank" class="nav-link nav-badge">REST API ↗</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Flash Messages Container (Mendukung Alpine.js Auto-Dismiss & HTMX OOB Swap) -->
+    <div class="container alerts-container" id="alerts-container">
+        {% include "components/_alerts.html" %}
+    </div>
+
+    <!-- Konten Halaman Dinamis -->
+    <main class="main-content" id="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" id="app-footer">
+        <div class="container footer-container">
+            <p>&copy; 2026 <strong>Fawwaz Yaqzhan & Google Antigravity</strong>. Dibangun dengan Flask, SQLite, Jinja2, HTMX & Alpine.js.</p>
+            <p class="footer-subtext">Service Layer &bull; Modern Monolith &bull; 100% Offline Ready</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Kustom Tambahan -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!--
+  Nama File:          _alerts.html
+  Deskripsi File:     Komponen partial flash messages dengan animasi auto-dismiss Alpine.js
+  Penulis File:       Fawwaz Yaqzhan & Google Antigravity
+  Tanggal Pembuatan:  28-09-2026
+  Tanggal Pembaruan:  28-09-2026
+  Catatan:
+    - Ditampilkan otomatis jika ada get_flashed_messages
+    - Dapat di-swap secara dinamis oleh HTMX Out-Of-Band (OOB)
+    - Auto-dismiss dalam 4 detik melalui Alpine.js
+-->
+<div id="alerts-content">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}" 
+                     role="alert"
+                     x-data="{ show: true }"
+                     x-show="show"
+                     x-init="setTimeout(() => show = false, 4500)"
+                     x-transition:enter="alert-enter"
+                     x-transition:leave="alert-leave">
+                    <span class="alert-icon">
+                        {% if category == 'success' %}✓{% elif category == 'error' %}✕{% else %}ℹ{% endif %}
+                    </span>
+                    <span class="alert-message">{{ message }}</span>
+                    <button type="button" class="alert-close" aria-label="Tutup pesan" @click="show = false">&times;</button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+</div>

@@ -1,0 +1,47 @@
+<!--
+  Nama File:          _item_row.html
+  Deskripsi File:     Komponen partial baris item dengan aksi interaktif HTMX
+  Penulis File:       Fawwaz Yaqzhan & Google Antigravity
+  Tanggal Pembuatan:  28-09-2026
+  Tanggal Pembaruan:  28-09-2026
+  Catatan:
+    - Menangani toggle status dan penghapusan secara instan tanpa reload browser
+    - Target swap spesifik ke elemen baris atau kontainer daftar
+-->
+<div class="item-entry {% if item.is_completed %}item-completed{% endif %}" id="item-entry-{{ item.id }}">
+    <div class="item-info">
+        <div class="item-title-row">
+            <h4 class="item-title">{{ item.title }}</h4>
+            <span class="status-badge {% if item.is_completed %}badge-done{% else %}badge-pending{% endif %}">
+                {% if item.is_completed %}Selesai{% else %}Aktif{% endif %}
+            </span>
+        </div>
+        {% if item.description %}
+            <p class="item-desc">{{ item.description }}</p>
+        {% endif %}
+        <span class="item-time">Dibuat: {{ item.created_at.strftime('%d-%m-%Y %H:%M') }}</span>
+    </div>
+
+    <div class="item-actions">
+        <!-- Toggle Status Button via HTMX -->
+        <button type="button" 
+                class="btn-action btn-toggle" 
+                title="Ubah status penyelesaian"
+                hx-post="{{ url_for('main.toggle_item', item_id=item.id) }}"
+                hx-target="#item-entry-{{ item.id }}"
+                hx-swap="outerHTML">
+            {% if item.is_completed %}↺ Aktifkan{% else %}✓ Selesai{% endif %}
+        </button>
+
+        <!-- Delete Button via HTMX -->
+        <button type="button" 
+                class="btn-action btn-delete" 
+                title="Hapus item"
+                hx-post="{{ url_for('main.delete_item', item_id=item.id) }}"
+                hx-target="#items-list-container"
+                hx-swap="outerHTML"
+                hx-confirm="Apakah Anda yakin ingin menghapus item '{{ item.title }}'?">
+            🗑️ Hapus
+        </button>
+    </div>
+</div>

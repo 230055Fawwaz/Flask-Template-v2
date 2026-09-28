@@ -1,0 +1,36 @@
+<!--
+  Nama File:          _item_list.html
+  Deskripsi File:     Komponen partial daftar item database
+  Penulis File:       Fawwaz Yaqzhan & Google Antigravity
+  Tanggal Pembuatan:  28-09-2026
+  Tanggal Pembaruan:  28-09-2026
+  Catatan:
+    - Menampilkan seluruh item atau status kosong (empty state)
+    - Dapat di-swap secara utuh oleh HTMX saat ada item baru atau item dihapus
+    - Mengintegrasikan pembaruan flash alert via Out-Of-Band (OOB) swap
+-->
+<div id="items-list-container">
+    <!-- OOB Flash Alerts Swap jika ada pesan baru -->
+    <div id="alerts-container" hx-swap-oob="true">
+        {% include "components/_alerts.html" %}
+    </div>
+
+    <div class="list-header">
+        <h3 class="form-title">📋 Daftar Item di Database</h3>
+        <span class="count-badge" id="items-counter">{{ items|length }} Item</span>
+    </div>
+
+    {% if items %}
+        <div class="items-container" id="items-container">
+            {% for item in items %}
+                {% include "components/_item_row.html" %}
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty-state" id="empty-state">
+            <div class="empty-icon">📂</div>
+            <h4>Belum ada data</h4>
+            <p>Tambahkan item pertama Anda menggunakan formulir di samping untuk menguji penyimpanan database SQLite.</p>
+        </div>
+    {% endif %}
+</div>
