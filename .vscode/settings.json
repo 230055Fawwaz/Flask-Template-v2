@@ -3,17 +3,26 @@
 // Deskripsi File:     Pengaturan workspace VS Code untuk template Flask
 // Penulis File:       Fawwaz Yaqzhan & Google Antigravity
 // Tanggal Pembuatan:  06-09-2026
-// Tanggal Pembaruan:  06-09-2026
+// Tanggal Pembaruan:  28-09-2026
 // Catatan:
 //   - Menghubungkan virtual environment (.venv) ke interpreter Python
+//   - Mengaktifkan Ruff sebagai formatter dan linter utama Python
 //   - Mendukung asosiasi file Jinja HTML
 //   - Mempertahankan tema cyberpunk kustom dan preferensi editor
 // ==========================================
 {
-    // --- PENGATURAN PYTHON & FLASK ---
+    // --- PENGATURAN PYTHON & RUFF ---
     "python.defaultInterpreterPath": "${workspaceFolder}/.venv/Scripts/python.exe",
     "python.terminal.activateEnvironment": true,
     "python.analysis.autoImportCompletions": true,
+    "[python]": {
+        "editor.defaultFormatter": "charliermarsh.ruff",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.fixAll": "explicit",
+            "source.organizeImports": "explicit"
+        }
+    },
 
     // --- ASOSIASI FILE ---
     "files.associations": {

@@ -3,10 +3,11 @@
 // Deskripsi File:     Rekomendasi ekstensi VS Code untuk pengembangan Flask
 // Penulis File:       Fawwaz Yaqzhan & Google Antigravity
 // Tanggal Pembuatan:  06-09-2026
-// Tanggal Pembaruan:  06-09-2026
+// Tanggal Pembaruan:  28-09-2026
 // Catatan:
 //   - Menyediakan ekstensi resmi Python dan debugger
 //   - Mendukung sintaks highlighting template Jinja2
+//   - Mengintegrasikan linter & formatter cepat Ruff
 //   - Meningkatkan pengalaman produktivitas pengembang
 // ==========================================
 {
@@ -14,6 +15,7 @@
         "ms-python.python",
         "ms-python.debugpy",
         "ms-python.vscode-pylance",
+        "charliermarsh.ruff",
         "wholroyd.jinja",
         "formulahendry.auto-rename-tag"
     ]

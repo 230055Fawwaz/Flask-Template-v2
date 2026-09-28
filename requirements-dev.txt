@@ -1,0 +1,23 @@
+# ==========================================
+# Nama File:          requirements-dev.txt
+# Deskripsi File:     Daftar paket dependensi pengembangan (development & testing)
+# Penulis File:       Fawwaz Yaqzhan & Google Antigravity
+# Tanggal Pembuatan:  28-09-2026
+# Tanggal Pembaruan:  28-09-2026
+# Catatan:
+#   - Menyertakan seluruh dependensi runtime dari requirements.txt
+#   - Menyediakan ruff untuk linting dan formatting kode
+#   - Menyediakan invoke untuk task runner cross-platform
+#   - Menyediakan pytest untuk automated testing
+# ==========================================
+
+-r requirements.txt
+
+# Perkakas Linting & Formatting All-in-One
+ruff>=0.5.0
+
+# Task Runner Otomasi Cross-Platform
+invoke>=2.2.0
+
+# Framework Testing
+pytest>=8.0.0

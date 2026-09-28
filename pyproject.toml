@@ -1,0 +1,80 @@
+# ==========================================
+# Nama File:          pyproject.toml
+# Deskripsi File:     Konfigurasi terpusat untuk perkakas Python modern (Ruff, Pytest)
+# Penulis File:       Fawwaz Yaqzhan & Google Antigravity
+# Tanggal Pembuatan:  28-09-2026
+# Tanggal Pembaruan:  28-09-2026
+# Catatan:
+#   - Menggantikan black, flake8, isort, dan pylint dengan Ruff
+#   - Mengatur konfigurasi pengujian otomatis dengan Pytest
+# ==========================================
+
+[project]
+name = "flask-template-v2"
+version = "2.0.0"
+description = "Template boilerplate Flask MVC modern dengan Jinja2, HTMX, dan arsitektur bersih"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "Flask>=3.0.0",
+    "Flask-SQLAlchemy>=3.1.1",
+    "Flask-Migrate>=4.0.7",
+    "python-dotenv>=1.0.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.5.0",
+    "invoke>=2.2.0",
+    "pytest>=8.0.0",
+]
+
+# --- KONFIGURASI RUFF (Linter & Formatter) ---
+[tool.ruff]
+target-version = "py313"
+line-length = 100
+exclude = [
+    ".git",
+    ".venv",
+    "migrations",
+    "instance",
+    "build",
+    "dist",
+]
+
+[tool.ruff.lint]
+select = [
+    "E",     # pycodestyle errors
+    "W",     # pycodestyle warnings
+    "F",     # pyflakes
+    "I",     # isort (import sorting otomatis)
+    "UP",    # pyupgrade (sintaks Python modern)
+    "B",     # flake8-bugbear (pencegahan bug umum)
+    "SIM",   # flake8-simplify (penyederhanaan kode)
+]
+ignore = [
+    "E501",  # Panjang baris diabaikan (dikelola oleh formatter)
+    "B008",  # Do not perform function calls in argument defaults (berguna untuk Flask/FastAPI)
+]
+
+[tool.ruff.lint.isort]
+combine-as-imports = true
+known-first-party = ["app"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+# --- KONFIGURASI PYTEST ---
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --strict-markers"
+filterwarnings = [
+    "ignore::DeprecationWarning",
+]
