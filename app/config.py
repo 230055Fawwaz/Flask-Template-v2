@@ -3,11 +3,12 @@
 # Deskripsi File:     Pengaturan konfigurasi lingkungan aplikasi Flask
 # Penulis File:       Fawwaz Yaqzhan & Google Antigravity
 # Tanggal Pembuatan:  06-09-2026
-# Tanggal Pembaruan:  06-09-2026
+# Tanggal Pembaruan:  28-09-2026
 # Catatan:
 #   - Memisahkan konfigurasi Development, Testing, dan Production
 #   - Menggunakan SQLite sebagai default database engine
 #   - Memanfaatkan python-dotenv untuk membaca variabel .env
+#   - Mengontrol inisialisasi tabel otomatis (AUTO_CREATE_TABLES)
 # ==========================================
 
 import os
@@ -25,6 +26,7 @@ class Config:
     """Konfigurasi dasar (Base Configuration)."""
     SECRET_KEY = os.getenv("SECRET_KEY", "dev-secret-key-change-in-production")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    AUTO_CREATE_TABLES = False
 
     # Direktori instance untuk database SQLite
     INSTANCE_PATH = BASE_DIR / "instance"
@@ -39,18 +41,21 @@ class Config:
 class DevelopmentConfig(Config):
     """Konfigurasi untuk lingkungan pengembangan (Development)."""
     DEBUG = True
+    AUTO_CREATE_TABLES = True  # Otomatis buat tabel SQLite saat pertama kali clone proyek
 
 
 class TestingConfig(Config):
     """Konfigurasi untuk lingkungan pengujian otomatis (Testing)."""
     TESTING = True
     SQLALCHEMY_DATABASE_URI = "sqlite:///:memory:"
+    AUTO_CREATE_TABLES = True  # Database in-memory memerlukan tabel baru di setiap sesi test
 
 
 class ProductionConfig(Config):
     """Konfigurasi untuk lingkungan rilis/produksi (Production)."""
     DEBUG = False
     TESTING = False
+    AUTO_CREATE_TABLES = False  # Di production, skema dikelola murni oleh Flask-Migrate
 
 
 # Pemetaan konfigurasi berdasarkan nama lingkungan

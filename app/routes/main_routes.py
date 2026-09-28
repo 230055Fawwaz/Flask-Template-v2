@@ -3,15 +3,15 @@
 # Deskripsi File:     Definisi rute blueprint utama aplikasi
 # Penulis File:       Fawwaz Yaqzhan & Google Antigravity
 # Tanggal Pembuatan:  06-09-2026
-# Tanggal Pembaruan:  06-09-2026
+# Tanggal Pembaruan:  28-09-2026
 # Catatan:
-#   - Menghubungkan URL endpoint HTTP ke fungsi di ItemController
+#   - Menghubungkan URL endpoint HTTP ke fungsi di ItemService
 #   - Menyediakan rute web HTML dan endpoint REST API sederhana
 #   - Menerapkan flash message dan redirect untuk interaksi formulir
 # ==========================================
 
-from flask import Blueprint, render_template, request, redirect, url_for, flash, jsonify
-from app.controllers.item_controller import ItemController
+from flask import Blueprint, flash, jsonify, redirect, render_template, request, url_for
+from app.services.item_service import ItemService
 
 # Inisialisasi Blueprint utama
 main_bp = Blueprint("main", __name__)
@@ -20,7 +20,7 @@ main_bp = Blueprint("main", __name__)
 @main_bp.route("/", methods=["GET"])
 def index():
     """Menampilkan halaman beranda aplikasi dengan daftar item."""
-    items = ItemController.get_all_items()
+    items = ItemService.get_all_items()
     return render_template("index.html", items=items)
 
 
@@ -30,7 +30,7 @@ def create_item():
     title = request.form.get("title")
     description = request.form.get("description")
 
-    success, result = ItemController.create_item(title=title, description=description)
+    success, result = ItemService.create_item(title=title, description=description)
 
     if success:
         flash(f"Item '{result.title}' berhasil ditambahkan!", "success")
@@ -43,7 +43,7 @@ def create_item():
 @main_bp.route("/items/toggle/<int:item_id>", methods=["POST"])
 def toggle_item(item_id):
     """Endpoint untuk mengubah status selesai/belum selesai suatu item."""
-    success, result = ItemController.toggle_item_status(item_id)
+    success, result = ItemService.toggle_item_status(item_id)
 
     if success:
         status_text = "selesai" if result.is_completed else "aktif kembali"
@@ -57,7 +57,7 @@ def toggle_item(item_id):
 @main_bp.route("/items/delete/<int:item_id>", methods=["POST"])
 def delete_item(item_id):
     """Endpoint untuk menghapus item berdasarkan ID."""
-    success, message = ItemController.delete_item(item_id)
+    success, message = ItemService.delete_item(item_id)
 
     if success:
         flash(message, "success")
@@ -70,7 +70,7 @@ def delete_item(item_id):
 @main_bp.route("/api/items", methods=["GET"])
 def api_get_items():
     """Contoh endpoint API untuk mengembalikan data item dalam format JSON."""
-    items = ItemController.get_all_items()
+    items = ItemService.get_all_items()
     return jsonify({
         "status": "success",
         "total": len(items),
