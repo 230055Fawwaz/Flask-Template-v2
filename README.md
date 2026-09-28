@@ -61,8 +61,6 @@ Flask-Template-v2/
 │   │   │   ├── _alerts.html      # Flash message toast auto-dismiss Alpine.js
 │   │   │   ├── _item_row.html    # Komponen baris item individual
 │   │   │   └── _item_list.html   # Wadah daftar item & empty state
-│   │   ├── base.html             # Wrapper kompatibilitas mundur
-│   │   └── index.html            # Halaman beranda utama
 │   │
 │   └── static/                   # ASSETS: Gaya & Skrip Statis
 │       ├── css/

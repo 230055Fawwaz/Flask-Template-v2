@@ -21,7 +21,7 @@ main_bp = Blueprint("main", __name__)
 def index():
     """Menampilkan halaman beranda aplikasi dengan daftar item."""
     items = ItemService.get_all_items()
-    return render_template("index.html", items=items)
+    return render_template("pages/index.html", items=items)
 
 
 @main_bp.route("/items/create", methods=["POST"])
