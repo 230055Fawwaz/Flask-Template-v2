@@ -1,21 +1,20 @@
 // ==========================================
 // Nama File:          tasks.json
-// Deskripsi File:     Daftar otomasi task VS Code untuk alur kerja Flask Template
+// Deskripsi File:     Daftar otomasi task VS Code untuk alur kerja Flask Template v2
 // Penulis File:       Fawwaz Yaqzhan & Google Antigravity
 // Tanggal Pembuatan:  06-09-2026
-// Tanggal Pembaruan:  06-09-2026
+// Tanggal Pembaruan:  28-09-2026
 // Catatan:
-//   - Shortcut untuk mengeksekusi run_server.bat
-//   - Shortcut untuk setup virtual environment dan requirements
-//   - Shortcut untuk menu interaktif migrasi database
+//   - Terintegrasi dengan Invoke (tasks.py) dan Ruff
+//   - Menyediakan task cepat untuk run server, testing, linting, formatting, dan database
 // ==========================================
 {
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Flask: Jalankan Server",
+            "label": "Flask: Jalankan Server (invoke run)",
             "type": "shell",
-            "command": ".\\run_server.bat",
+            "command": "invoke run",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
@@ -27,23 +26,53 @@
             }
         },
         {
-            "label": "Flask: Setup Lingkungan (.venv)",
+            "label": "Flask: Format & Perbaiki Kode (invoke format)",
             "type": "shell",
-            "command": ".\\setup_env.bat",
+            "command": "invoke format",
             "problemMatcher": [],
             "presentation": {
                 "reveal": "always",
-                "panel": "new"
+                "panel": "shared"
             }
         },
         {
-            "label": "Flask: Migrasi Database (Menu)",
+            "label": "Flask: Jalankan Pengujian (invoke test)",
             "type": "shell",
-            "command": ".\\db_migrate.bat",
+            "command": "invoke test",
+            "problemMatcher": [],
+            "group": "test",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "Flask: Pemeriksaan Lengkap (invoke check)",
+            "type": "shell",
+            "command": "invoke check",
             "problemMatcher": [],
             "presentation": {
                 "reveal": "always",
-                "panel": "new"
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "Flask: Migrasi Database (invoke db-upgrade)",
+            "type": "shell",
+            "command": "invoke db-upgrade",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "Flask: Bersihkan Cache (invoke clean)",
+            "type": "shell",
+            "command": "invoke clean",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "silent"
             }
         }
     ]
