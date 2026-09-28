@@ -1,0 +1,50 @@
+// ==========================================
+// Nama File:          tasks.json
+// Deskripsi File:     Daftar otomasi task VS Code untuk alur kerja Flask Template
+// Penulis File:       Fawwaz Yaqzhan & Google Antigravity
+// Tanggal Pembuatan:  06-09-2026
+// Tanggal Pembaruan:  06-09-2026
+// Catatan:
+//   - Shortcut untuk mengeksekusi run_server.bat
+//   - Shortcut untuk setup virtual environment dan requirements
+//   - Shortcut untuk menu interaktif migrasi database
+// ==========================================
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Flask: Jalankan Server",
+            "type": "shell",
+            "command": ".\\run_server.bat",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        },
+        {
+            "label": "Flask: Setup Lingkungan (.venv)",
+            "type": "shell",
+            "command": ".\\setup_env.bat",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        },
+        {
+            "label": "Flask: Migrasi Database (Menu)",
+            "type": "shell",
+            "command": ".\\db_migrate.bat",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        }
+    ]
+}

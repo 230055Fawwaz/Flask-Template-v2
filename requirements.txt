@@ -1,0 +1,16 @@
+# ==========================================
+# Nama File:          requirements.txt
+# Deskripsi File:     Daftar paket dependensi Python untuk template Flask
+# Penulis File:       Fawwaz Yaqzhan & Google Antigravity
+# Tanggal Pembuatan:  06-09-2026
+# Tanggal Pembaruan:  06-09-2026
+# Catatan:
+#   - Flask sebagai core web framework
+#   - Flask-SQLAlchemy dan Flask-Migrate untuk database ORM & migrasi
+#   - python-dotenv untuk pengelolaan environment variables
+# ==========================================
+
+Flask>=3.0.0
+Flask-SQLAlchemy>=3.1.1
+Flask-Migrate>=4.0.7
+python-dotenv>=1.0.1

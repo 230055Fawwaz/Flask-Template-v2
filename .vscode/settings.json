@@ -1,0 +1,82 @@
+// ==========================================
+// Nama File:          settings.json
+// Deskripsi File:     Pengaturan workspace VS Code untuk template Flask
+// Penulis File:       Fawwaz Yaqzhan & Google Antigravity
+// Tanggal Pembuatan:  06-09-2026
+// Tanggal Pembaruan:  06-09-2026
+// Catatan:
+//   - Menghubungkan virtual environment (.venv) ke interpreter Python
+//   - Mendukung asosiasi file Jinja HTML
+//   - Mempertahankan tema cyberpunk kustom dan preferensi editor
+// ==========================================
+{
+    // --- PENGATURAN PYTHON & FLASK ---
+    "python.defaultInterpreterPath": "${workspaceFolder}/.venv/Scripts/python.exe",
+    "python.terminal.activateEnvironment": true,
+    "python.analysis.autoImportCompletions": true,
+
+    // --- ASOSIASI FILE ---
+    "files.associations": {
+        "*.html": "jinja-html"
+    },
+
+    // --- UTAMA ---
+    "window.zoomLevel": 0,
+    "editor.fontSize": 14,
+    "editor.fontFamily": "Consolas, 'Courier New', monospace",
+    "editor.wordWrap": "on",
+    "editor.minimap.enabled": true,
+    "files.autoSave": "afterDelay",
+
+    // --- TEMA DASAR ---
+    "workbench.colorTheme": "Abyss",
+    "workbench.iconTheme": "vscode-icons",
+
+    // --- CUSTOM CYBERPUNK COLORS ---
+    "workbench.colorCustomizations": {
+        "editor.foreground": "#81F7F3",
+        "editor.background": "#000c18",
+        "editorLineNumber.activeForeground": "#F6F606",
+        "editor.selectionBackground": "#5a189a80",
+        "editorCursor.foreground": "#ff00ff",
+        "terminal.foreground": "#81F7F3",
+        "terminal.background": "#000c18"
+    },
+
+    // --- WARNA KODE (SYNTAX) ---
+    "editor.tokenColorCustomizations": {
+        "textMateRules": [
+            {
+                "scope": "comment",
+                "settings": {
+                    "foreground": "#F6F606",
+                    "fontStyle": "italic"
+                }
+            },
+            {
+                "scope": "string",
+                "settings": {
+                    "foreground": "#19d800"
+                }
+            },
+            {
+                "scope": "keyword",
+                "settings": {
+                    "foreground": "#ff00ff",
+                    "fontStyle": "bold"
+                }
+            },
+            {
+                "scope": "entity.name.function",
+                "settings": {
+                    "foreground": "#00bfff"
+                }
+            }
+        ]
+    },
+
+    // --- GAYA RETRO/CYBERPUNK ---
+    "editor.cursorBlinking": "expand",
+    "editor.cursorSmoothCaretAnimation": "on",
+    "editor.cursorStyle": "line"
+}

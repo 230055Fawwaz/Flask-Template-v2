@@ -1,0 +1,34 @@
+// ==========================================
+// Nama File:          launch.json
+// Deskripsi File:     Konfigurasi debugger VS Code untuk aplikasi Flask
+// Penulis File:       Fawwaz Yaqzhan & Google Antigravity
+// Tanggal Pembuatan:  06-09-2026
+// Tanggal Pembaruan:  06-09-2026
+// Catatan:
+//   - Menjalankan server Flask dalam mode debug via F5
+//   - Mengaktifkan debugger Jinja template
+//   - Menyediakan profil debug untuk file Python aktif
+// ==========================================
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Flask Server (run.py)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/run.py",
+            "console": "integratedTerminal",
+            "jinja": true,
+            "env": {
+                "FLASK_DEBUG": "1"
+            }
+        },
+        {
+            "name": "Python: File Aktif",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        }
+    ]
+}

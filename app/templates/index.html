@@ -1,0 +1,212 @@
+<!--
+  Nama File:          index.html
+  Deskripsi File:     Halaman utama template dengan panduan arsitektur dan demo CRUD
+  Penulis File:       Fawwaz Yaqzhan & Google Antigravity
+  Tanggal Pembuatan:  06-09-2026
+  Tanggal Pembaruan:  06-09-2026
+  Catatan:
+    - Menjelaskan pola MVC dan Application Factory
+    - Menyediakan form interaktif untuk uji coba Model-View-Controller
+    - Menampilkan daftar data langsung dari database SQLite
+-->
+{% extends "base.html" %}
+
+{% block title %}Beranda | Flask MVC Template{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-badge">⚡ Starter Boilerplate Siap Pakai</div>
+        <h1 class="hero-title">Python Flask <span class="gradient-text">MVC Template</span></h1>
+        <p class="hero-description">
+            Template proyek web tangguh berbasis Flask dengan pola <strong>Application Factory</strong>, 
+            <strong>Blueprint Routes</strong>, pencegahan <strong>Circular Import</strong>, 
+            serta struktur <strong>Model-View-Controller (MVC)</strong> yang rapi dan modular.
+        </p>
+        <div class="hero-actions">
+            <a href="#crud-demo" class="btn btn-primary">Uji Coba Demo CRUD</a>
+            <a href="#mvc-architecture" class="btn btn-secondary">Pelajari Arsitektur</a>
+        </div>
+    </section>
+
+    <!-- Arsitektur MVC Cards -->
+    <section class="section" id="mvc-architecture">
+        <div class="section-header">
+            <h2 class="section-title">Pola Arsitektur & Prinsip Desain</h2>
+            <p class="section-subtitle">Setiap layer dipisahkan berdasarkan tanggung jawab tunggal (Single Responsibility Principle)</p>
+        </div>
+
+        <div class="card-grid">
+            <!-- Card Model -->
+            <div class="card mvc-card">
+                <div class="card-icon model-icon">📦</div>
+                <h3 class="card-title">1. Model (Data)</h3>
+                <span class="card-tag">app/models/</span>
+                <p class="card-text">
+                    Mendefinisikan skema tabel database dan representasi entitas menggunakan <strong>Flask-SQLAlchemy</strong>.
+                </p>
+                <ul class="card-features">
+                    <li>Terisolasi dari logika HTTP</li>
+                    <li>Mendukung migrasi otomatis (Alembic)</li>
+                    <li>Dilengkapi method serialisasi <code>to_dict()</code></li>
+                </ul>
+            </div>
+
+            <!-- Card View -->
+            <div class="card mvc-card">
+                <div class="card-icon view-icon">🎨</div>
+                <h3 class="card-title">2. View (Tampilan)</h3>
+                <span class="card-tag">app/templates/ & static/</span>
+                <p class="card-text">
+                    Merender antarmuka pengguna interaktif menggunakan <strong>HTML5 semantik</strong>, 
+                    <strong>Vanilla CSS</strong>, dan <strong>Vanilla JS</strong>.
+                </p>
+                <ul class="card-features">
+                    <li>Desain modern & responsif tanpa framework CSS berat</li>
+                    <li>Sistem layout Jinja2 inheritance (base template)</li>
+                    <li>Komponen alert dan modal interaktif</li>
+                </ul>
+            </div>
+
+            <!-- Card Controller -->
+            <div class="card mvc-card">
+                <div class="card-icon controller-icon">⚙️</div>
+                <h3 class="card-title">3. Controller (Logika)</h3>
+                <span class="card-tag">app/controllers/</span>
+                <p class="card-text">
+                    Memproses validasi, manipulasi database, dan alur bisnis. Menghindari penulisan query langsung di file routes.
+                </p>
+                <ul class="card-features">
+                    <li>Satu file controller per domain fitur</li>
+                    <li>Error handling dan proteksi rollback database</li>
+                    <li>Dapat digunakan ulang oleh web & REST API</li>
+                </ul>
+            </div>
+
+            <!-- Card Routing / Factory -->
+            <div class="card mvc-card">
+                <div class="card-icon factory-icon">🔌</div>
+                <h3 class="card-title">4. App Factory & Routes</h3>
+                <span class="card-tag">app/__init__.py & routes/</span>
+                <p class="card-text">
+                    Fungsi <code>create_app()</code> mengonfigurasi aplikasi. Blueprint memetakan URL HTTP murni ke fungsi Controller.
+                </p>
+                <ul class="card-features">
+                    <li>Ekstensi di <code>extensions.py</code> mencegah circular import</li>
+                    <li>Kemudahan pengujian unit (TestingConfig)</li>
+                    <li>Struktur modular untuk penambahan blueprint baru</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive CRUD Demo -->
+    <section class="section" id="crud-demo">
+        <div class="section-header">
+            <h2 class="section-title">Demonstrasi Interaktif CRUD</h2>
+            <p class="section-subtitle">
+                Data disimpan langsung di database SQLite (<code>instance/app.db</code>) melalui alur Route &rarr; Controller &rarr; Model.
+            </p>
+        </div>
+
+        <div class="demo-layout">
+            <!-- Form Card -->
+            <div class="card form-card">
+                <h3 class="form-title">➕ Tambah Item Baru</h3>
+                <p class="form-description">Formulir ini memanggil <code>POST /items/create</code> yang ditangani oleh <code>ItemController.create_item()</code>.</p>
+
+                <form action="{{ url_for('main.create_item') }}" method="POST" class="form-group" id="form-create-item">
+                    <div class="input-field">
+                        <label for="input-title">Judul Item <span class="required">*</span></label>
+                        <input type="text" id="input-title" name="title" placeholder="Contoh: Belajar Application Factory" required>
+                    </div>
+
+                    <div class="input-field">
+                        <label for="input-description">Deskripsi Singkat (Opsional)</label>
+                        <textarea id="input-description" name="description" rows="3" placeholder="Tuliskan catatan tambahan mengenai item ini..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block" id="btn-submit-item">
+                        Simpan ke Database
+                    </button>
+                </form>
+            </div>
+
+            <!-- Items List Card -->
+            <div class="card list-card">
+                <div class="list-header">
+                    <h3 class="form-title">📋 Daftar Item di Database</h3>
+                    <span class="count-badge">{{ items|length }} Item</span>
+                </div>
+
+                {% if items %}
+                    <div class="items-container" id="items-container">
+                        {% for item in items %}
+                            <div class="item-entry {% if item.is_completed %}item-completed{% endif %}">
+                                <div class="item-info">
+                                    <div class="item-title-row">
+                                        <h4 class="item-title">{{ item.title }}</h4>
+                                        <span class="status-badge {% if item.is_completed %}badge-done{% else %}badge-pending{% endif %}">
+                                            {% if item.is_completed %}Selesai{% else %}Aktif{% endif %}
+                                        </span>
+                                    </div>
+                                    {% if item.description %}
+                                        <p class="item-desc">{{ item.description }}</p>
+                                    {% endif %}
+                                    <span class="item-time">Dibuat: {{ item.created_at.strftime('%d-%m-%Y %H:%M') }}</span>
+                                </div>
+
+                                <div class="item-actions">
+                                    <!-- Toggle Status Form -->
+                                    <form action="{{ url_for('main.toggle_item', item_id=item.id) }}" method="POST" class="inline-form">
+                                        <button type="submit" class="btn-action btn-toggle" title="Ubah status">
+                                            {% if item.is_completed %}↺ Aktifkan{% else %}✓ Selesai{% endif %}
+                                        </button>
+                                    </form>
+
+                                    <!-- Delete Form -->
+                                    <form action="{{ url_for('main.delete_item', item_id=item.id) }}" method="POST" class="inline-form delete-form">
+                                        <button type="submit" class="btn-action btn-delete" title="Hapus item">
+                                            🗑️ Hapus
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="empty-state" id="empty-state">
+                        <div class="empty-icon">📂</div>
+                        <h4>Belum ada data</h4>
+                        <p>Tambahkan item pertama Anda menggunakan formulir di samping untuk menguji penyimpanan database SQLite.</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Batch Automation Info -->
+    <section class="section" id="batch-scripts">
+        <div class="section-header">
+            <h2 class="section-title">Otomasi Skrip Batch (.bat)</h2>
+            <p class="section-subtitle">Tersedia skrip siap pakai untuk mempermudah alur kerja di sistem operasi Windows</p>
+        </div>
+
+        <div class="batch-grid">
+            <div class="batch-card">
+                <div class="batch-name"><code>run_server.bat</code></div>
+                <p>Mengaktifkan virtual environment secara otomatis dan menjalankan development server Flask di <code>localhost:5000</code>.</p>
+            </div>
+            <div class="batch-card">
+                <div class="batch-name"><code>setup_env.bat</code></div>
+                <p>Membuat virtual environment Python <code>.venv</code> baru dan menginstal semua paket dari <code>requirements.txt</code>.</p>
+            </div>
+            <div class="batch-card">
+                <div class="batch-name"><code>db_migrate.bat</code></div>
+                <p>Menu praktis untuk menjalankan inisialisasi database, membuat migrasi skema baru, dan mengeksekusi upgrade migrasi.</p>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

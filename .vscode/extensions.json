@@ -1,0 +1,20 @@
+// ==========================================
+// Nama File:          extensions.json
+// Deskripsi File:     Rekomendasi ekstensi VS Code untuk pengembangan Flask
+// Penulis File:       Fawwaz Yaqzhan & Google Antigravity
+// Tanggal Pembuatan:  06-09-2026
+// Tanggal Pembaruan:  06-09-2026
+// Catatan:
+//   - Menyediakan ekstensi resmi Python dan debugger
+//   - Mendukung sintaks highlighting template Jinja2
+//   - Meningkatkan pengalaman produktivitas pengembang
+// ==========================================
+{
+    "recommendations": [
+        "ms-python.python",
+        "ms-python.debugpy",
+        "ms-python.vscode-pylance",
+        "wholroyd.jinja",
+        "formulahendry.auto-rename-tag"
+    ]
+}
