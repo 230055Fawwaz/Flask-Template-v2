@@ -1,27 +1,27 @@
 <!--
   Nama File:          index.html
-  Deskripsi File:     Halaman utama template dengan panduan arsitektur modern v2 dan demo CRUD HTMX
+  Deskripsi File:     Halaman awal starter template Flask barebones dengan panduan arsitektur modern
   Penulis File:       Fawwaz Yaqzhan & Google Antigravity
   Tanggal Pembuatan:  06-09-2026
   Tanggal Pembaruan:  29-09-2026
   Catatan:
-    - Menerapkan arsitektur Service Layer dan pola Modern Monolith (HTMX + Alpine.js)
-    - Demo CRUD interaktif tanpa reload halaman (zero-reload) dengan pustaka offline
-    - Menjelaskan otomasi cross-platform Invoke dan linter Ruff
+    - Bersih dari kode aplikasi contoh (barebones) dan siap dipakai untuk proyek apa pun
+    - Menyediakan demonstrasi koneksi HTMX minimalis melalui health check
+    - Menyajikan panduan modular arsitektur Service Layer
 -->
 {% extends "layouts/base.html" %}
 
 {% block title %}Beranda | Flask Modern Template v2{% endblock %}
 
 {% block extra_css %}
-<!-- Tambahkan stylesheet atau tag <style> khusus halaman ini jika diperlukan -->
+<!-- Stylesheet atau tag <style> khusus halaman ini jika diperlukan -->
 {% endblock %}
 
 {% block content %}
 <div class="container">
     <!-- Hero Section -->
     <section class="hero-section">
-        <div class="hero-badge">⚡ Starter Boilerplate Modern v2.0 &bull; 100% Offline</div>
+        <div class="hero-badge">⚡ Starter Boilerplate Modern v2.0 &bull; 100% Offline Ready</div>
         <h1 class="hero-title">Python Flask <span class="gradient-text">Modern Monolith</span></h1>
         <p class="hero-description">
             Template boilerplate siap pakai berbasis Flask dengan pola <strong>Application Factory</strong>, 
@@ -29,163 +29,163 @@
             serta interaktivitas dinamis berbasis <strong>HTMX</strong> dan <strong>Alpine.js</strong> tanpa build-step Node.js.
         </p>
         <div class="hero-actions">
-            <a href="#crud-demo" class="btn btn-primary">Uji Coba Demo HTMX</a>
-            <a href="#modern-architecture" class="btn btn-secondary">Pelajari Arsitektur</a>
+            <a href="#quickstart" class="btn btn-primary">🚀 Panduan Mulai Cepat</a>
+            <a href="#architecture" class="btn btn-secondary">📐 Pelajari Arsitektur</a>
+        </div>
+    </section>
+
+    <!-- Quickstart Guide Section -->
+    <section class="section" id="quickstart">
+        <div class="section-header">
+            <h2 class="section-title">Langkah Memulai Proyek Baru</h2>
+            <p class="section-subtitle">Struktur modular siap pakai: ikuti 4 langkah ini untuk menambahkan fitur baru</p>
+        </div>
+
+        <div class="card-grid">
+            <!-- Step 1: Model -->
+            <div class="card mvc-card">
+                <div class="card-icon model-icon">📦</div>
+                <h3 class="card-title">1. Buat Model Data</h3>
+                <span class="card-tag">app/models/</span>
+                <p class="card-text">
+                    Definisikan skema tabel database dan relasi entitas Anda menggunakan <strong>Flask-SQLAlchemy</strong> modern.
+                </p>
+                <ul class="card-features">
+                    <li>Buat berkas model baru (misal: <code>user_model.py</code>)</li>
+                    <li>Ekspor model di <code>app/models/__init__.py</code></li>
+                    <li>Jalankan migrasi skema database</li>
+                </ul>
+            </div>
+
+            <!-- Step 2: Service Layer -->
+            <div class="card mvc-card">
+                <div class="card-icon controller-icon">⚙️</div>
+                <h3 class="card-title">2. Tulis Service Layer</h3>
+                <span class="card-tag">app/services/</span>
+                <p class="card-text">
+                    Letakkan query <code>db.select()</code>, validasi data, dan aturan bisnis aplikasi di kelas Service.
+                </p>
+                <ul class="card-features">
+                    <li>Isolasi aturan bisnis dari HTTP controller</li>
+                    <li>Gunakan <code>db.session.commit()</code> dan rollback otomatis</li>
+                    <li>Dapat dipakai ulang oleh Web maupun API</li>
+                </ul>
+            </div>
+
+            <!-- Step 3: Routes & Blueprint -->
+            <div class="card mvc-card">
+                <div class="card-icon factory-icon">🔌</div>
+                <h3 class="card-title">3. Daftarkan Rute</h3>
+                <span class="card-tag">app/routes/</span>
+                <p class="card-text">
+                    Petakan permintaan HTTP ke metode Service dan kembalikan response partial HTML atau JSON.
+                </p>
+                <ul class="card-features">
+                    <li>Tambahkan rute di <code>main_routes.py</code> atau blueprint baru</li>
+                    <li>Dukung header <code>HX-Request</code> untuk respons instan</li>
+                    <li>Gunakan flash message untuk status pengguna</li>
+                </ul>
+            </div>
+
+            <!-- Step 4: UI & Interaktivitas -->
+            <div class="card mvc-card">
+                <div class="card-icon view-icon">🎨</div>
+                <h3 class="card-title">4. Rancang UI Dinamis</h3>
+                <span class="card-tag">app/templates/</span>
+                <p class="card-text">
+                    Buat template tampilan dengan <strong>Jinja2 + HTMX + Alpine.js</strong> yang 100% lokal dan offline.
+                </p>
+                <ul class="card-features">
+                    <li>Warisi layout utama dari <code>layouts/base.html</code></li>
+                    <li>Gunakan atribut <code>hx-get</code>, <code>hx-post</code>, dll.</li>
+                    <li>Gaya siap pakai dengan CSS variables & dark theme</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Uji Koneksi HTMX (Smoke Test) -->
+    <section class="section" id="htmx-smoke-test">
+        <div class="section-header">
+            <h2 class="section-title">Uji Kesiapan Lingkungan & HTMX</h2>
+            <p class="section-subtitle">
+                Pastikan server Flask dan pustaka HTMX lokal berfungsi sempurna dengan uji ping ke endpoint health check.
+            </p>
+        </div>
+
+        <div class="card" style="max-width: 680px; margin: 0 auto; text-align: center; padding: 2rem;">
+            <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">⚡</div>
+            <h3 style="margin-bottom: 0.5rem; color: var(--text-primary);">Verifikasi Integrasi HTMX</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.95rem;">
+                Tombol di bawah akan mengirimkan request AJAX via HTMX ke rute <code>/health</code> tanpa memuat ulang browser.
+            </p>
+
+            <button 
+                class="btn btn-primary" 
+                hx-get="{{ url_for('main.health_check') }}" 
+                hx-target="#health-response-box" 
+                hx-swap="innerHTML"
+                hx-indicator="#health-indicator"
+                id="btn-test-htmx"
+                style="margin: 0 auto 1.5rem auto; display: inline-flex; align-items: center; gap: 0.5rem;"
+            >
+                <span>Ping Health Check</span>
+                <span id="health-indicator" class="htmx-indicator" style="display: none;">⏳</span>
+            </button>
+
+            <div id="health-response-box" style="text-align: left; background: var(--bg-input); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 1rem; font-family: monospace; font-size: 0.85rem; color: var(--text-secondary); min-height: 52px;">
+                <span style="color: var(--text-muted);">// Hasil respons dari server akan muncul di sini...</span>
+            </div>
         </div>
     </section>
 
     <!-- Arsitektur Bersih Cards -->
-    <section class="section" id="modern-architecture">
+    <section class="section" id="architecture">
         <div class="section-header">
-            <h2 class="section-title">Pola Arsitektur & Prinsip Desain v2</h2>
-            <p class="section-subtitle">Struktur modular, teruji, dan memisahkan tanggung jawab (Separation of Concerns)</p>
+            <h2 class="section-title">Pilar Arsitektur Modern v2</h2>
+            <p class="section-subtitle">Fondasi andal yang memisahkan tanggung jawab (Separation of Concerns)</p>
         </div>
 
         <div class="card-grid">
-            <!-- Card Model -->
-            <div class="card mvc-card">
-                <div class="card-icon model-icon">📦</div>
-                <h3 class="card-title">1. Model (Data)</h3>
-                <span class="card-tag">app/models/</span>
+            <div class="card">
+                <h3 class="card-title" style="color: var(--accent-cyan); margin-bottom: 0.5rem;">🏗️ Application Factory</h3>
                 <p class="card-text">
-                    Mendefinisikan skema tabel database dan relasi entitas menggunakan <strong>Flask-SQLAlchemy</strong> modern.
+                    Fungsi <code>create_app()</code> di <code>app/__init__.py</code> mengisolasi inisialisasi aplikasi untuk mempermudah testing dan deployment lingkungan ganda (Dev, Test, Prod).
                 </p>
-                <ul class="card-features">
-                    <li>Terisolasi dari manipulasi HTTP</li>
-                    <li>Mendukung migrasi Alembic (Flask-Migrate)</li>
-                    <li>Dilengkapi serialisasi <code>to_dict()</code></li>
-                </ul>
             </div>
-
-            <!-- Card Service Layer -->
-            <div class="card mvc-card">
-                <div class="card-icon controller-icon">⚙️</div>
-                <h3 class="card-title">2. Service Layer (Logika)</h3>
-                <span class="card-tag">app/services/</span>
+            <div class="card">
+                <h3 class="card-title" style="color: var(--primary); margin-bottom: 0.5rem;">⚙️ Service Layer Pattern</h3>
                 <p class="card-text">
-                    Memproses transaksi database, query <code>db.select()</code>, dan aturan bisnis tanpa tercampur kode HTTP.
+                    Memisahkan logika bisnis dari lapisan presentasi HTTP sehingga controller tetap ramping, mudah diuji, dan kode dapat digunakan ulang.
                 </p>
-                <ul class="card-features">
-                    <li>Menggantikan Controller tradisional</li>
-                    <li>Penanganan rollback otomatis saat galat</li>
-                    <li>Dapat digunakan ulang oleh API maupun Web</li>
-                </ul>
             </div>
-
-            <!-- Card Routes & Factory -->
-            <div class="card mvc-card">
-                <div class="card-icon factory-icon">🔌</div>
-                <h3 class="card-title">3. Factory & Routes</h3>
-                <span class="card-tag">app/routes/ & app/__init__.py</span>
+            <div class="card">
+                <h3 class="card-title" style="color: var(--success); margin-bottom: 0.5rem;">⚡ HTMX & Alpine.js Offline</h3>
                 <p class="card-text">
-                    Fungsi <code>create_app()</code> menginisialisasi aplikasi. Blueprint HTTP memetakan request dan merespons partial HTML / JSON.
+                    Memberikan pengalaman responsif setara Single Page Application (SPA) tanpa instalasi npm, node_modules, atau bundler yang rumit.
                 </p>
-                <ul class="card-features">
-                    <li>Ekstensi di <code>extensions.py</code> cegah circular import</li>
-                    <li>Dukungan header <code>HX-Request</code> cerdas</li>
-                    <li>Konfigurasi terpisah Dev, Testing, dan Prod</li>
-                </ul>
-            </div>
-
-            <!-- Card View & Dynamic UI -->
-            <div class="card mvc-card">
-                <div class="card-icon view-icon">🎨</div>
-                <h3 class="card-title">4. Modern Monolith UI</h3>
-                <span class="card-tag">app/templates/ & static/</span>
-                <p class="card-text">
-                    Merender UI responsif dengan <strong>Jinja2 + HTMX + Alpine.js</strong> yang tersimpan 100% lokal dan offline.
-                </p>
-                <ul class="card-features">
-                    <li>Zero reload SPA-like experience dengan HTMX</li>
-                    <li>Auto-dismiss notifikasi & state dengan Alpine.js</li>
-                    <li>Tanpa npm, webpack, maupun build tools rumit</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- Interactive CRUD Demo with HTMX -->
-    <section class="section" id="crud-demo">
-        <div class="section-header">
-            <h2 class="section-title">Demonstrasi Interaktif CRUD (HTMX)</h2>
-            <p class="section-subtitle">
-                Uji coba penambahan, perubahan status, dan penghapusan data secara instan tanpa memuat ulang browser.
-            </p>
-        </div>
-
-        <div class="demo-layout">
-            <!-- Form Card with HTMX -->
-            <div class="card form-card">
-                <div class="form-card-header">
-                    <h3 class="form-title">➕ Tambah Item Baru</h3>
-                    <span class="htmx-badge">⚡ Didukung HTMX</span>
-                </div>
-                <p class="form-description">
-                    Formulir ini mengirimkan data via AJAX HTMX ke <code>POST /items/create</code> dan memperbarui tabel secara instan.
-                </p>
-
-                <form action="{{ url_for('main.create_item') }}" 
-                      method="POST" 
-                      class="form-group" 
-                      id="form-create-item"
-                      hx-post="{{ url_for('main.create_item') }}"
-                      hx-target="#items-list-container"
-                      hx-swap="outerHTML"
-                      hx-on::after-request="if(event.detail.successful) this.reset()"
-                      hx-indicator="#form-spinner">
-                    <div class="input-field">
-                        <label for="input-title">Judul Item <span class="required">*</span></label>
-                        <input type="text" id="input-title" name="title" placeholder="Contoh: Eksplorasi HTMX di Flask" required>
-                    </div>
-
-                    <div class="input-field">
-                        <label for="input-description">Deskripsi Singkat (Opsional)</label>
-                        <textarea id="input-description" name="description" rows="3" placeholder="Tuliskan catatan detail mengenai item ini..."></textarea>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary btn-block" id="btn-submit-item">
-                        <span class="btn-text">Simpan ke Database</span>
-                        <span class="htmx-indicator-spinner" id="form-spinner">⏳ Memproses...</span>
-                    </button>
-                </form>
-            </div>
-
-            <!-- Items List Card with HTMX Component -->
-            <div class="card list-card">
-                {% include "components/_item_list.html" %}
-            </div>
-        </div>
-    </section>
-
-    <!-- Modern Task Runner & Tooling Info -->
-    <section class="section" id="tooling-section">
-        <div class="section-header">
-            <h2 class="section-title">Otomasi Perintah Cross-Platform (Invoke & Ruff)</h2>
-            <p class="section-subtitle">Gunakan file <code>tasks.py</code> untuk produktivitas tinggi di Windows, Linux, dan macOS</p>
-        </div>
-
-        <div class="batch-grid">
-            <div class="batch-card">
-                <div class="batch-name"><code>invoke run</code></div>
-                <p>Menjalankan Flask development server dengan auto-reload di <code>http://127.0.0.1:5000/</code>.</p>
-            </div>
-            <div class="batch-card">
-                <div class="batch-name"><code>invoke format</code></div>
-                <p>Memformat kode dan merapikan urutan import secara instan menggunakan linter modern ultra cepat <strong>Ruff</strong>.</p>
-            </div>
-            <div class="batch-card">
-                <div class="batch-name"><code>invoke test</code></div>
-                <p>Mengeksekusi automated test suite lengkap berbasis <strong>Pytest</strong> dengan database SQLite in-memory.</p>
             </div>
         </div>
     </section>
 </div>
 {% endblock %}
 
-{% block extra_js %}
-<!-- Tambahkan pustaka JavaScript pihak ketiga khusus halaman ini jika diperlukan (misal: chart.min.js) -->
-{% endblock %}
-
 {% block scripts %}
-<!-- Tambahkan skrip interaktivitas atau inisialisasi JS khusus halaman ini jika diperlukan -->
+<script>
+    // Dukungan indikator HTMX bawaan
+    document.addEventListener("htmx:afterRequest", function(evt) {
+        if (evt.detail.target.id === "health-response-box") {
+            try {
+                const parsed = JSON.parse(evt.detail.xhr.responseText);
+                evt.detail.target.innerHTML = `
+                    <div style="color: var(--success); font-weight: 600; margin-bottom: 0.25rem;">✔ Status: ${parsed.status.toUpperCase()}</div>
+                    <div style="color: var(--text-primary); margin-bottom: 0.25rem;">Layanan: ${parsed.service}</div>
+                    <div style="color: var(--text-secondary);">${parsed.message}</div>
+                `;
+            } catch(e) {
+                // Biarkan teks asli jika bukan JSON murni
+            }
+        }
+    });
+</script>
 {% endblock %}

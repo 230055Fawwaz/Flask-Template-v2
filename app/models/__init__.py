@@ -3,13 +3,14 @@
 # Deskripsi File:     Package initializer untuk modul model database
 # Penulis File:       Fawwaz Yaqzhan & Google Antigravity
 # Tanggal Pembuatan:  06-09-2026
-# Tanggal Pembaruan:  06-09-2026
+# Tanggal Pembaruan:  29-09-2026
 # Catatan:
-#   - Mengekspor model agar dapat diimpor langsung dari app.models
-#   - Memudahkan pendaftaran model ke sistem migrasi Flask-Migrate
-#   - Menerapkan prinsip modularitas dan kerapihan arsitektur
+#   - Mengekspor model SQLAlchemy agar dapat diimpor langsung dari app.models
+#   - Mendaftarkan model ke sistem migrasi Flask-Migrate / Alembic
 # ==========================================
 
-from app.models.item_model import Item
+# Daftarkan / impor model aplikasi Anda di sini. Contoh:
+# from app.models.user_model import User
+# __all__ = ["User"]
 
-__all__ = ["Item"]
+__all__: list[str] = []

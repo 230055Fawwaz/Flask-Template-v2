@@ -10,8 +10,10 @@
     - Mendukung sistem partials, flash messages dinamis, dan HTMX swapping
     - Menyediakan blok modular extra_css, extra_js, dan scripts untuk ekstensi per halaman
 -->
+
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,6 +30,7 @@
     <script src="{{ url_for('static', filename='js/vendor/htmx.min.js') }}"></script>
     <script defer src="{{ url_for('static', filename='js/vendor/alpine.min.js') }}"></script>
 </head>
+
 <body hx-boost="false">
     <!-- Navbar Header -->
     <header class="navbar" id="app-navbar">
@@ -37,9 +40,9 @@
                 <span class="brand-text">Flask<span class="brand-accent">Template</span> <span class="version-tag">v2.0</span></span>
             </a>
             <nav class="nav-links">
-                <a href="#modern-architecture" class="nav-link">Arsitektur v2</a>
-                <a href="#crud-demo" class="nav-link">Demo HTMX</a>
-                <a href="/api/items" target="_blank" class="nav-link nav-badge">REST API ↗</a>
+                <a href="#quickstart" class="nav-link">Panduan Mulai</a>
+                <a href="#architecture" class="nav-link">Pola Arsitektur</a>
+                <a href="{{ url_for('main.health_check') }}" target="_blank" class="nav-link nav-badge">Health API ↗</a>
             </nav>
         </div>
     </header>
@@ -57,7 +60,7 @@
     <!-- Footer -->
     <footer class="footer" id="app-footer">
         <div class="container footer-container">
-            <p>&copy; 2026 <strong>Fawwaz Yaqzhan & Google Antigravity</strong>. Dibangun dengan Flask, SQLite, Jinja2, HTMX & Alpine.js.</p>
+            <p>&copy; 2026 <strong>Fawwaz Yaqzhan & Google Antigravity</strong>. Dibangun dengan Flask, SQLAlchemy, Jinja2, HTMX & Alpine.js.</p>
             <p class="footer-subtext">Service Layer &bull; Modern Monolith &bull; 100% Offline Ready</p>
         </div>
     </footer>
@@ -70,5 +73,7 @@
 
     <!-- Kode Skrip / Inisialisasi JS Khusus Halaman -->
     {% block scripts %}{% endblock %}
+
 </body>
+
 </html>

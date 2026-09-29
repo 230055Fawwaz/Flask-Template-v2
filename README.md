@@ -37,32 +37,28 @@ Flask-Template-v2/
 │   ├── extensions.py             # Inisialisasi db & migrate (cegah circular import)
 │   │
 │   ├── models/                   # [M] MODEL: Definisi skema tabel SQLAlchemy 2.0
-│   │   ├── __init__.py           # Ekspor entitas model
-│   │   └── item_model.py         # Contoh entitas model (Item)
+│   │   └── __init__.py           # Ekspor entitas model aplikasi
 │   │
 │   ├── services/                 # [S] SERVICE: Logika bisnis & query database
-│   │   ├── __init__.py           # Ekspor kelas service
-│   │   └── item_service.py       # Operasi bisnis dan query CRUD Item
+│   │   └── __init__.py           # Ekspor kelas service
 │   │
-│   ├── routes/                   # [R] ROUTES: Blueprint pemetaan endpoint & HTMX partials
+│   ├── routes/                   # [R] ROUTES: Blueprint pemetaan endpoint & views
 │   │   ├── __init__.py           # Ekspor blueprint
-│   │   └── main_routes.py        # Blueprint rute utama & API JSON
+│   │   └── main_routes.py        # Blueprint rute utama (index & /health)
 │   │
 │   ├── templates/                # [V] VIEW: Template Jinja2 Modular
 │   │   ├── layouts/
 │   │   │   └── base.html         # Master layout, SEO, vendor offline scripts
 │   │   ├── pages/
-│   │   │   └── index.html        # Halaman beranda
-│   │   ├── components/           # Partials untuk HTMX & UI dinamis
-│   │   │   ├── _alerts.html      # Flash message toast auto-dismiss Alpine.js
-│   │   │   ├── _item_row.html    # Komponen baris item individual
-│   │   │   └── _item_list.html   # Wadah daftar item & empty state
+│   │   │   └── index.html        # Halaman beranda starter
+│   │   └── components/           # Partials untuk HTMX & UI dinamis
+│   │       └── _alerts.html      # Flash message toast auto-dismiss Alpine.js
 │   │
 │   └── static/                   # ASSETS: Gaya & Skrip Statis
 │       ├── css/
 │       │   └── style.css         # Styling dark-slate, glassmorphism, & transisi HTMX
 │       └── js/
-│           ├── script.js         # Event listener lifecycle HTMX
+│           ├── script.js         # Event listener lifecycle HTMX global
 │           └── vendor/           # Pustaka frontend 100% lokal offline
 │               ├── chart.min.js  # Chart.js v4.4.4
 │               ├── htmx.min.js   # HTMX 2.0.2
@@ -71,8 +67,7 @@ Flask-Template-v2/
 ├── tests/                        # AUTOMATED TESTING SUITE
 │   ├── __init__.py
 │   ├── conftest.py               # Fixture Pytest (app, client, runner)
-│   ├── test_services.py          # Unit tests logika bisnis & database
-│   └── test_routes.py            # Integration tests HTTP & HTMX partials
+│   └── test_routes.py            # Integration tests HTTP & health check
 │
 ├── instance/                     # Folder otomatis untuk database SQLite (app.db)
 ├── pyproject.toml                # Konfigurasi terpusat Ruff, Pytest, dan metadata proyek
