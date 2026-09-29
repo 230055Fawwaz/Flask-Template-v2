@@ -102,7 +102,13 @@ python -m venv .venv
 # Linux / macOS:
 source .venv/bin/activate
 
-# 3. Instal dependensi pengembangan
+# 3. Buat file .env dari template
+# Windows:
+copy .env.example .env
+# Linux / macOS:
+cp .env.example .env
+
+# 4. Instal dependensi pengembangan
 pip install -r requirements-dev.txt
 ```
 
@@ -167,6 +173,12 @@ Untuk menambahkan modul baru dengan standar arsitektur v2:
        id = db.Column(db.Integer, primary_key=True)
        nama = db.Column(db.String(100), nullable=False)
    ```
+   *Lalu daftarkan/ekspor di `app/models/__init__.py`:*
+   ```python
+   from app.models.produk_model import Produk
+   __all__ = ["Produk"]
+   ```
+
 2. **Buat Service Layer** di `app/services/<fitur>_service.py`:
    ```python
    from app.extensions import db
@@ -176,6 +188,11 @@ Untuk menambahkan modul baru dengan standar arsitektur v2:
        @staticmethod
        def get_all():
            return list(db.session.scalars(db.select(Produk)).all())
+   ```
+   *Lalu daftarkan/ekspor di `app/services/__init__.py`:*
+   ```python
+   from app.services.produk_service import ProdukService
+   __all__ = ["ProdukService"]
    ```
 3. **Buat Route Blueprint** di `app/routes/<fitur>_routes.py`:
    ```python
