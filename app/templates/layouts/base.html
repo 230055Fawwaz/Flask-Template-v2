@@ -3,11 +3,12 @@
   Deskripsi File:     Template master layout HTML aplikasi Flask (Layouts)
   Penulis File:       Fawwaz Yaqzhan & Google Antigravity
   Tanggal Pembuatan:  06-09-2026
-  Tanggal Pembaruan:  28-09-2026
+  Tanggal Pembaruan:  29-09-2026
   Catatan:
     - Kerangka HTML5 semantik dan metadata SEO
     - Memuat pustaka HTMX dan Alpine.js lokal untuk pengoperasian 100% offline
     - Mendukung sistem partials, flash messages dinamis, dan HTMX swapping
+    - Menyediakan blok modular extra_css, extra_js, dan scripts untuk ekstensi per halaman
 -->
 <!DOCTYPE html>
 <html lang="id">
@@ -19,6 +20,9 @@
 
     <!-- Stylesheet Utama -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- Stylesheet Tambahan Khusus Halaman -->
+    {% block extra_css %}{% endblock %}
 
     <!-- Vendor Libraries (Full Offline: HTMX & Alpine.js) -->
     <script src="{{ url_for('static', filename='js/vendor/htmx.min.js') }}"></script>
@@ -60,5 +64,11 @@
 
     <!-- JavaScript Kustom Tambahan -->
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+    <!-- Pustaka JavaScript Tambahan Khusus Halaman (misal: Chart.js) -->
+    {% block extra_js %}{% endblock %}
+
+    <!-- Kode Skrip / Inisialisasi JS Khusus Halaman -->
+    {% block scripts %}{% endblock %}
 </body>
 </html>
