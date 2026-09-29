@@ -44,10 +44,6 @@ Flask-Template-v2/
 │   │   ├── __init__.py           # Ekspor kelas service
 │   │   └── item_service.py       # Operasi bisnis dan query CRUD Item
 │   │
-│   ├── controllers/              # [DEPRECATED] Kompatibilitas mundur mengarah ke services
-│   │   ├── __init__.py
-│   │   └── item_controller.py
-│   │
 │   ├── routes/                   # [R] ROUTES: Blueprint pemetaan endpoint & HTMX partials
 │   │   ├── __init__.py           # Ekspor blueprint
 │   │   └── main_routes.py        # Blueprint rute utama & API JSON
@@ -68,6 +64,7 @@ Flask-Template-v2/
 │       └── js/
 │           ├── script.js         # Event listener lifecycle HTMX
 │           └── vendor/           # Pustaka frontend 100% lokal offline
+│               ├── chart.min.js  # Chart.js v4.4.4
 │               ├── htmx.min.js   # HTMX 2.0.2
 │               └── alpine.min.js # Alpine.js 3.14.1
 │
@@ -153,8 +150,8 @@ Gunakan perintah `invoke` untuk seluruh kebutuhan alur kerja:
 ## 🗄️ Manajemen Database
 
 Template v2 dilengkapi pengaturan `AUTO_CREATE_TABLES`:
-* **Mode Development & Testing**: Tabel otomatis dibuat saat aplikasi dijalankan, sehingga pengembang baru dapat langsung bereksperimen tanpa setup migrasi manual.
-* **Mode Production**: Skema dikelola murni dan aman menggunakan perintah migrasi:
+* **Mode Development, Testing, & Offline-First Production**: Tabel otomatis dibuat saat aplikasi dijalankan jika belum tersedia, sehingga aplikasi standalone / offline langsung siap digunakan tanpa perlu setup migrasi manual oleh pengguna akhir.
+* **Manajemen Skema Terkontrol (Opsional via Migrasi)**: Jika ingin mengontrol perubahan skema secara ketat, Anda dapat mengatur `AUTO_CREATE_TABLES=False` di file `.env` dan menggunakan perintah migrasi Alembic:
   ```bash
   invoke db-migrate -m "pesan_perubahan"
   invoke db-upgrade
