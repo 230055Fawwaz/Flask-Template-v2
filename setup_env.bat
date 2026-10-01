@@ -37,7 +37,7 @@ if not exist ".venv" (
     )
     echo [V] Virtual environment berhasil dibuat.
 ) else (
-    echo [*] Virtual environment (.venv) sudah ada, melanjutkan...
+    echo [*] Virtual environment [.venv] sudah ada, melanjutkan...
 )
 
 REM Aktifkan environment
@@ -49,7 +49,7 @@ echo [*] Memperbarui pip ke versi terbaru...
 python -m pip install --upgrade pip --quiet
 
 REM Install dependensi
-echo [*] Menginstal dependensi dari requirements-dev.txt (termasuk ruff & invoke)...
+echo [*] Menginstal dependensi dari requirements-dev.txt (termasuk ruff dan invoke)...
 pip install -r requirements-dev.txt
 if %ERRORLEVEL% NEQ 0 (
     echo [X] Terjadi kendala saat menginstal requirements.

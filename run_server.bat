@@ -19,7 +19,7 @@ echo.
 
 REM Cek apakah direktori .venv tersedia
 if exist ".venv\Scripts\activate.bat" (
-    echo [*] Mengaktifkan virtual environment (.venv)...
+    echo [*] Mengaktifkan virtual environment [.venv]...
     call .venv\Scripts\activate.bat
 ) else (
     echo [!] PERINGATAN: Folder .venv tidak ditemukan.
